@@ -12,7 +12,8 @@ public class HashTag {
 
     @DatabaseField(generatedId = true)
     private Long id;
-    @DatabaseField
+
+    @DatabaseField(unique = true)
     private String value;
 
     public HashTag(){
@@ -23,6 +24,7 @@ public class HashTag {
         this.value = value;
     }
 
-
-
+    public String getValue() {
+        return value;
+    }
 }

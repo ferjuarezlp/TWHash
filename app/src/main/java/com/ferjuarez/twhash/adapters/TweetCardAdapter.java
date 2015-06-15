@@ -17,10 +17,14 @@ public class TweetCardAdapter extends RecyclerView.Adapter<TweetCardAdapter.View
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView mTextView;
+        public TextView mTextViewText;
+        public TextView mTextViewScreenname;
+        public TextView mTextViewUsername;
         public ViewHolder(View v) {
             super(v);
-            this.mTextView = (TextView) v.findViewById(R.id.info_text);
+            this.mTextViewText = (TextView) v.findViewById(R.id.info_text);
+            this.mTextViewScreenname = (TextView) v.findViewById(R.id.textViewScreenname);
+            this.mTextViewUsername = (TextView) v.findViewById(R.id.textViewUsername);
         }
     }
 
@@ -47,8 +51,9 @@ public class TweetCardAdapter extends RecyclerView.Adapter<TweetCardAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(mTweets.get(position).getText());
-
+        holder.mTextViewText.setText(mTweets.get(position).getText());
+        holder.mTextViewScreenname.setText("@" +mTweets.get(position).getUser().getScreenName());
+        holder.mTextViewUsername.setText(mTweets.get(position).getUser().getName());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

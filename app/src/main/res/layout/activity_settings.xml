@@ -23,33 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/linearSearch"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.ferjuarez.twhash.views.ChipsMultiAutoCompleteTextview
-                        android:id="@+id/chipsMultiComplete"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_margin="5dp"
-                        android:layout_weight="0.8"
-                        android:ems="10"
-                        />
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/title_search"
-                        android:id="@+id/btnSearch" />
-                </LinearLayout>
-
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerTweets"
+                    android:id="@+id/recyclerSettings"
                     android:scrollbars="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>

@@ -2,6 +2,7 @@ package com.ferjuarez.twhash.api;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -11,7 +12,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ferjuarez.twhash.models.Tweet;
+import com.ferjuarez.twhash.utils.Utils;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -80,8 +86,9 @@ public class RequestManager {
 	}
 
 
-	public void search(String url, final String access_token, final OnSearchFinishListener mRequestFinish){
-		StringRequest stringRequest = new StringRequest(Request.Method.GET,url, new Response.Listener<String>() {
+	public void search(final Map<String,String> searchParams, final String accessToken, final OnSearchFinishListener requestFinish){
+		String urlWithParams = Utils.buildParamsForSearch(UrlConstants.TW_SEARCH_URL, searchParams);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,urlWithParams , new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
                 StringBuilder sb = new StringBuilder();
@@ -98,27 +105,26 @@ public class RequestManager {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+				try {
+					JSONObject jsonObj = new JSONObject(sb.toString());
+					requestFinish.OnSearchFinished(Tweet.jsonToTwitter(jsonObj.getJSONArray("statuses").toString()), true);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 
-                mRequestFinish.OnSearchFinished(Tweet.jsonToTwitter(sb.toString()), true);
 			}
 		}, new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				Log.e(TAG, error.toString() + error.getMessage());
-				mRequestFinish.OnSearchFinished(new ArrayList<Tweet>(), false);
+				requestFinish.OnSearchFinished(new ArrayList<Tweet>(), false);
 			}
 		}){
-			/*@Override
-			protected Map<String,String> getParams(){
-				Map<String,String> params = new HashMap<>();
-				params.put("grant_type", "client_credentials");
-				return params;
-			}*/
 
 			@Override
 			public Map<String, String> getHeaders() throws AuthFailureError {
 				Map<String,String> params = new HashMap<String, String>();
-                params.put("Authorization", "Bearer " + access_token);
+                params.put("Authorization", "Bearer " + accessToken);
 				params.put("Content-Type", "application/json");
 
                 return params;
@@ -131,6 +137,7 @@ public class RequestManager {
 
 		mRequestQueue.add(stringRequest);
 	}
+
 
 
 	// convert a JSON authentication object into an Authenticated object
