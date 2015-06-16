@@ -19,21 +19,21 @@ import android.widget.TextView;
 
 import com.ferjuarez.twhash.R;
 
-public class ChipsMultiAutoCompleteTextview extends MultiAutoCompleteTextView implements AdapterView.OnItemClickListener {
+public class ChipsMultiAutoCompleteTextView extends MultiAutoCompleteTextView implements AdapterView.OnItemClickListener {
     private final String TAG = "ChipsMultiAutoCompleteTextview";
  
-    public ChipsMultiAutoCompleteTextview(Context context) {
+    public ChipsMultiAutoCompleteTextView(Context context) {
         super(context);
         init(context);
     }
 
-    public ChipsMultiAutoCompleteTextview(Context context, AttributeSet attrs) {
+    public ChipsMultiAutoCompleteTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public ChipsMultiAutoCompleteTextview(Context context, AttributeSet attrs,
-        int defStyle) {
+    public ChipsMultiAutoCompleteTextView(Context context, AttributeSet attrs,
+                                          int defStyle) {
         super(context, attrs, defStyle);
         init(context);
     }

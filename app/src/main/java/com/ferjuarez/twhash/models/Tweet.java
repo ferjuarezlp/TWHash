@@ -28,7 +28,7 @@ public class Tweet {
     private String createdAt;
 
     @SerializedName("user")
-    private TwUser user;
+    private TwitterUser user;
 
     public static Twitter jsonToTwitter(String result) {
         Twitter twits = null;
@@ -90,11 +90,11 @@ public class Tweet {
         this.createdAt = createdAt;
     }
 
-    public TwUser getUser() {
+    public TwitterUser getUser() {
         return user;
     }
 
-    public void setUser(TwUser user) {
+    public void setUser(TwitterUser user) {
         this.user = user;
     }
 }

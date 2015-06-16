@@ -21,21 +21,192 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerSettings"
-                    android:scrollbars="vertical"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
+                    android:layout_height="wrap_content">
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:layout_gravity="center" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/TextViewTitleStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_cache_search"
+                            android:layout_weight="0.5"
+                            android:layout_marginBottom="7dp"
+                            android:id="@+id/textViewCache" />
+
+                        <android.support.v7.widget.SwitchCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/switchCache"
+                            android:layout_marginRight="5dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_cache_search_exp"
+                        android:layout_marginBottom="7dp"
+                        android:id="@+id/textView" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.ferjuarez.twhash.views.RobotoTextView
+                            style="@style/TextViewTitleStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_exclusive"
+                            android:layout_weight="0.5"
+                            android:layout_marginBottom="7dp"
+                            android:id="@+id/textViewInclude" />
+
+                        <android.support.v7.widget.SwitchCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/switchExclusive"
+                            android:layout_marginRight="5dp"/>
+
+                    </LinearLayout>
+
+                    <com.ferjuarez.twhash.views.RobotoTextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_exclusive_exp"
+                        android:id="@+id/textView2" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.ferjuarez.twhash.views.RobotoTextView
+                            style="@style/TextViewTitleStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_geolocated"
+                            android:layout_weight="0.5"
+                            android:layout_marginBottom="7dp"
+                            android:id="@+id/textViewGeolocated" />
+
+                        <android.support.v7.widget.SwitchCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/switchGeolocated"
+                            android:layout_marginRight="5dp"/>
+
+                    </LinearLayout>
+
+                    <com.ferjuarez.twhash.views.RobotoTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_geolocated_exp"
+                        android:layout_marginBottom="7dp"
+                        android:id="@+id/textView3" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp">
+
+                    <com.ferjuarez.twhash.views.RobotoTextView
+                        style="@style/TextViewTitleStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_result_type"
+                        android:layout_weight="0.5"
+                        android:id="@+id/textViewResult" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/rbMixed" />
+
+                            <com.ferjuarez.twhash.views.RobotoTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_result_mixed_exp"
+                                android:id="@+id/textView4" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/rbRecent" />
+
+                            <com.ferjuarez.twhash.views.RobotoTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_result_recent_exp"
+                                android:id="@+id/textView5" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/rbPopular" />
+
+                            <com.ferjuarez.twhash.views.RobotoTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/settings_result_popular_exp"
+                                android:id="@+id/textView6" />
+                        </LinearLayout>
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </FrameLayout>
 

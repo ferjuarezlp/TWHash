@@ -1,4 +1,4 @@
-package com.ferjuarez.twhash.api;
+package com.ferjuarez.twhash.interfaces;
 
 import com.ferjuarez.twhash.models.Tweet;
 

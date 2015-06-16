@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by ferjuarez on 12/06/15.
  */
 
-public class TwUser {
+public class TwitterUser {
 
     @SerializedName("screen_name")
     private String screenName;

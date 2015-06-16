@@ -5,4 +5,13 @@
 
     </style>
 
+    <style name="TextViewTitleStyle" parent="TextAppearance.AppCompat.Title" >
+        <item name="android:textSize">15sp</item>
+    </style>
+
+
+    <style name="TextViewSubtitleStyle" parent="TextAppearance.AppCompat.Title" >
+        <item name="android:textSize">12sp</item>
+    </style>
+
 </resources>

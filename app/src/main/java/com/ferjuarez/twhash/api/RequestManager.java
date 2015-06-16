@@ -11,6 +11,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.ferjuarez.twhash.interfaces.OnAuthFinishListener;
+import com.ferjuarez.twhash.interfaces.OnSearchFinishListener;
 import com.ferjuarez.twhash.models.Tweet;
 import com.ferjuarez.twhash.utils.Utils;
 import com.google.gson.Gson;
