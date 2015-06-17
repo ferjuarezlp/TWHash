@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="blue" type="color">#03A9F4</item>
+    <item name="red" type="color">#FF5252</item>
+    <item name="orange" type="color">#FF9800</item>
+    <item name="alpha_orange" type="color">#77FFBB33</item>
+    <item name="dark_grey" type="color">#FF454545</item>
+    <item name="aplha_dark_grey" type="color">#55454545</item>
+</resources>

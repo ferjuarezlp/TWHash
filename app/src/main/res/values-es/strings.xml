@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Twhash</string>
+    <string name="title_activity_home">TWHash</string>
+    <string name="title_search_by">Buscá en Twitter\n tus temas favoritos</string>
+    <string name="title_activity_settings">Configuración</string>
+    <string name="title_no_results">Sin Resultados</string>
+    <string name="title_search">Buscar</string>
+    <string name="search_hint">Palabras Claves</string>
+    <string name="settings_cache_search">Cache de Búsqueda</string>
+    <string name="settings_cache_clear">Limpiar Cache</string>
+    <string name="settings_cache_search_exp">Las búsquedas seran guardadas para posterior uso.</string>
+    <string name="settings_exclusive">Modo Exclusivo</string>
+    <string name="settings_exclusive_exp">Todos las palabras serán buscadas de forma exclusiva.</string>
+    <string name="settings_geolocated">Búsqueda Geolocalizada</string>
+    <string name="settings_geolocated_exp">Búsquedas por posición actual (solo para tweets geotaggeados)</string>
+    <string name="settings_result_type">Tipo de Resultado</string>
+    <string name="settings_result_mixed">Mezclado</string>
+    <string name="settings_result_popular">Popular</string>
+    <string name="settings_result_recent">Reciente</string>
+    <string name="settings_result_mixed_exp">Incluye recientes y populares en el resultado</string>
+    <string name="settings_result_recent_exp">Solo las más recientes</string>
+    <string name="settings_result_popular_exp">Solo las más populares</string>
+    <string name="settings_no_location_msg">Esta funcionalidad requiere que habilite su ubicación.</string>
+    <string name="no_connection_msg">Por favor chequee su conexión de red.</string>
+</resources>

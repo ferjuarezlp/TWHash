@@ -12,6 +12,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ProgressBar
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:layout_gravity="center" />
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -30,6 +37,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
+                        android:hint="@string/search_hint"
                         android:layout_margin="5dp"
                         android:layout_weight="0.8"
                         android:ems="10"
@@ -39,8 +47,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title_search"
+                        android:layout_marginRight="5dp"
                         android:id="@+id/btnSearch" />
                 </LinearLayout>
+
+                <com.ferjuarez.twhash.views.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_no_results"
+                    android:layout_marginLeft="7dp"
+                    android:visibility="gone"
+                    android:id="@+id/textViewNoResults" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerTweets"
@@ -49,12 +66,23 @@
                     android:layout_height="match_parent"/>
             </LinearLayout>
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:layout_gravity="center" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <com.ferjuarez.twhash.views.RobotoTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/aplha_dark_grey"
+                    android:text="@string/title_search_by"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:id="@+id/textViewHelp" />
+            </LinearLayout>
+
+
 
         </FrameLayout>
 

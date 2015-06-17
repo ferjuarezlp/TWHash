@@ -12,25 +12,28 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.ferjuarez.twhash.R;
 import com.ferjuarez.twhash.adapters.TweetCardAdapter;
 import com.ferjuarez.twhash.api.ApiManager;
 import com.ferjuarez.twhash.api.Authenticated;
-import com.ferjuarez.twhash.interfaces.OnAuthFinishListener;
-import com.ferjuarez.twhash.interfaces.OnSearchFinishListener;
 import com.ferjuarez.twhash.api.UrlConstants;
 import com.ferjuarez.twhash.db.DatabaseHelper;
+import com.ferjuarez.twhash.interfaces.OnAuthFinishListener;
+import com.ferjuarez.twhash.interfaces.OnSearchFinishListener;
 import com.ferjuarez.twhash.models.Tweet;
 import com.ferjuarez.twhash.utils.PreferencesManager;
 import com.ferjuarez.twhash.utils.Utils;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -43,6 +46,10 @@ public class SearchFragment extends Fragment implements OnAuthFinishListener, On
     ChipsMultiAutoCompleteTextView chipsMultiComplete;
     @InjectView(R.id.progressBar)
     ProgressBar progressBar;
+    @InjectView(R.id.textViewNoResults)
+    RobotoTextView textViewNoResults;
+    @InjectView(R.id.textViewHelp)
+    RobotoTextView textViewHelp;
     @InjectView(R.id.recyclerTweets)
     RecyclerView mRecyclerView;
 
@@ -64,7 +71,9 @@ public class SearchFragment extends Fragment implements OnAuthFinishListener, On
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new TweetCardAdapter(getRetainedData());
+        mAdapter = new TweetCardAdapter(getActivity(), getRetainedData());
+        if(getRetainedData().size() ==0) textViewHelp.setVisibility(View.VISIBLE);
+        else textViewHelp.setVisibility(View.INVISIBLE);
         mRecyclerView.setAdapter(mAdapter);
 
         try {
@@ -95,19 +104,22 @@ public class SearchFragment extends Fragment implements OnAuthFinishListener, On
 
     private void checkAuthentication(){
         if(PreferencesManager.getInstance(getActivity()).getToken() == null || PreferencesManager.getInstance(getActivity()).getToken().equals("")){
-            String urlApiKey = null;
-            String urlApiSecret = null;
-            try {
-                urlApiKey = URLEncoder.encode(UrlConstants.CONSUMER_KEY, "UTF-8");
-                urlApiSecret = URLEncoder.encode(UrlConstants.CONSUMER_SECRET, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            String combined = urlApiKey + ":" + urlApiSecret;
+            if(Utils.checkConnectivity(getActivity())){
+                String urlApiKey = null;
+                String urlApiSecret = null;
+                try {
+                    urlApiKey = URLEncoder.encode(UrlConstants.CONSUMER_KEY, "UTF-8");
+                    urlApiSecret = URLEncoder.encode(UrlConstants.CONSUMER_SECRET, "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                String combined = urlApiKey + ":" + urlApiSecret;
 
-            // Base64 encode the string
-            String base64Encoded = Base64.encodeToString(combined.getBytes(), Base64.NO_WRAP);
-            ApiManager.getInstance(getActivity()).doRequest().auth(UrlConstants.TW_TOKEN_URL, base64Encoded, this);
+                // Base64 encode the string
+                String base64Encoded = Base64.encodeToString(combined.getBytes(), Base64.NO_WRAP);
+                ApiManager.getInstance(getActivity()).doRequest().auth(UrlConstants.TW_TOKEN_URL, base64Encoded, this);
+            } else Toast.makeText(getActivity(), getString(R.string.no_connection_msg), Toast.LENGTH_SHORT).show();
+
         } else progressBar.setVisibility(View.INVISIBLE);
 
     }
@@ -116,10 +128,14 @@ public class SearchFragment extends Fragment implements OnAuthFinishListener, On
     public void onSearch(View view) {
         Utils.hideKeyboard(getActivity(), chipsMultiComplete);
 
-        Map<String,String> params = new HashMap<>();
-        params.put("q", Utils.buildAndPersistSearchQuery(chipsMultiComplete.getText().toString(), getHelper()));
-        params.put("result_type", "mixed");
-        ApiManager.getInstance(getActivity()).doRequest().search(params, PreferencesManager.getInstance(getActivity()).getToken(), this);
+        if(Utils.checkConnectivity(getActivity())){
+            progressBar.setVisibility(View.VISIBLE);
+            Map<String,String> params = Utils.buildParms(getActivity(), chipsMultiComplete.getText().toString(),getHelper());
+            ApiManager.getInstance(getActivity()).doRequest().search(params, PreferencesManager.getInstance(getActivity()).getToken(), this);
+
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.no_connection_msg), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -133,8 +149,15 @@ public class SearchFragment extends Fragment implements OnAuthFinishListener, On
     @Override
     public void OnSearchFinished(List<Tweet> tweets, Boolean state) {
         if(state){
+            textViewHelp.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
+            if(tweets.size() == 0) {
+                textViewHelp.setVisibility(View.VISIBLE);
+                textViewNoResults.setVisibility(View.VISIBLE);
+            }
+            else textViewNoResults.setVisibility(View.GONE);
             retainData(tweets);
-            mAdapter = new TweetCardAdapter(tweets);
+            mAdapter = new TweetCardAdapter(getActivity(),tweets);
             mRecyclerView.setAdapter(mAdapter);
         }
     }

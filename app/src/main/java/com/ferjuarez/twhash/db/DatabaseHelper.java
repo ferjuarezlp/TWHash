@@ -83,6 +83,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return result;
     }
 
+    public void deleteHashTags() throws SQLException {
+       TableUtils.clearTable(getConnectionSource(), HashTag.class);
+    }
+
     @Override
     public void close() {
         super.close();

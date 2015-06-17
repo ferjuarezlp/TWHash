@@ -9,43 +9,69 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        card_view:cardCornerRadius="4dp"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="1dp"
         android:layout_marginBottom="4dp">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
+
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="2dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="2dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Text"
-                    android:textSize="15dp"
-                    android:id="@+id/textViewUsername" />
 
-                <TextView
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="aaa"
-                    android:textSize="12dp"
-                    android:id="@+id/textViewScreenname"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_height="wrap_content">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/imageViewProfile"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+
+                        android:layout_marginRight="15dp"
+                        app:border_width="1dp"
+                        app:border_color="@color/orange"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.ferjuarez.twhash.views.RobotoTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:textSize="16dp"
+                        android:id="@+id/textViewUsername" />
+
+                    <com.ferjuarez.twhash.views.RobotoTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="aaa"
+                        android:textSize="12dp"
+                        android:id="@+id/textViewScreenname"/>
+
+
+                </LinearLayout>
+
             </LinearLayout>
 
-            <TextView
+            <com.ferjuarez.twhash.views.RobotoTextView
                 android:id="@+id/info_text"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
